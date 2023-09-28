@@ -1,5 +1,5 @@
 import { ImageBackground, StyleSheet, Text, View, Image } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
 
 import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer'
 
@@ -9,12 +9,15 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import OnboardingScreen from '../screens/OnboardingScreen';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { AuthContext } from './context/AuthContext';
 
 const Stack = createNativeStackNavigator();
 
 
 
-const CustomDrawer = (props, Navigation) => {
+const CustomDrawer = (props, navigation) => {
+    const {logout} = useContext(AuthContext)
+
   return (
    <View style={{flex:1}}>
     <DrawerContentScrollView  {...props} contentContainerStyle={{backgroundColor:'#0077b6'}}>
@@ -43,7 +46,7 @@ const CustomDrawer = (props, Navigation) => {
     </TouchableOpacity>
 
     
-    <TouchableOpacity onPress={() => Navigation.navigate(Onboarding)}
+    <TouchableOpacity  onPress={() => {logout()}}
      style={{paddingVertical:15, }}>
     <View style={{flexDirection:'row', alignItems:'center'}}>
     <Ionicons name="exit-outline" size={22} />
